@@ -1,0 +1,69 @@
+table ObservationData_wibrlt
+	lineageTag: d52cda6c-c94b-4681-9151-1dd94e271d60
+
+	column states
+		dataType: string
+		lineageTag: d547746c-2880-40be-af54-09bacea31de0
+		summarizeBy: none
+		sourceColumn: states
+
+		annotation SummarizationSetBy = Automatic
+
+	column indicator
+		dataType: string
+		lineageTag: b7443899-b3e1-43f5-8b2a-4368ab393a26
+		summarizeBy: none
+		sourceColumn: indicator
+
+		annotation SummarizationSetBy = Automatic
+
+	column items
+		dataType: string
+		lineageTag: dc1231bc-8051-49ab-a3b8-c2d14ef9606d
+		summarizeBy: none
+		sourceColumn: items
+
+		annotation SummarizationSetBy = Automatic
+
+	column sex
+		dataType: string
+		lineageTag: a6fde2d8-b35d-482f-925c-8670347eb78a
+		summarizeBy: none
+		sourceColumn: sex
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: int64
+		formatString: 0
+		lineageTag: 5f26193d-177f-4d50-9196-e2f0f9bb6d45
+		summarizeBy: sum
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value
+		dataType: int64
+		formatString: 0
+		lineageTag: 35e8b342-bd17-42f6-a077-9e8858a65437
+		summarizeBy: sum
+		sourceColumn: Value
+
+		annotation SummarizationSetBy = Automatic
+
+	partition ObservationData_wibrlt = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\Adediwura Adelabu\Downloads\BI Class\Dataset\ObservationData_wibrlt-National Youth Baseline Survey\ObservationData_wibrlt.csv"),[Delimiter=",", Columns=7, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"states", type text}, {"indicator", type text}, {"items", type text}, {"sex", type text}, {"Unit", type text}, {"Date", Int64.Type}, {"Value", Int64.Type}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Unit"}),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Removed Columns",{{"Value", Int64.Type}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
