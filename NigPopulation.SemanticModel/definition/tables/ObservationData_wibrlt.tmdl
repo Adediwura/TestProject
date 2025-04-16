@@ -55,8 +55,8 @@ table ObservationData_wibrlt
 		mode: import
 		source =
 				let
-				    Source = Csv.Document(File.Contents("C:\Users\Adediwura Adelabu\Downloads\BI Class\Dataset\ObservationData_wibrlt-National Youth Baseline Survey\ObservationData_wibrlt.csv"),[Delimiter=",", Columns=7, Encoding=1252, QuoteStyle=QuoteStyle.None]),
-				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Source = Csv.Document(Web.Contents("https://docs.google.com/spreadsheets/d/e/2PACX-1vQZwLkCxsOffON4zmHiIlkyv8CPK-AQ4zETR8Bl_5yigZLPn3MhpmUbpltOslePL1rwgpU5noP0Fn8t/pub?output=csv"),[Delimiter=",", Columns=7, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				  #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
 				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"states", type text}, {"indicator", type text}, {"items", type text}, {"sex", type text}, {"Unit", type text}, {"Date", Int64.Type}, {"Value", Int64.Type}}),
 				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Unit"}),
 				    #"Changed Type1" = Table.TransformColumnTypes(#"Removed Columns",{{"Value", Int64.Type}})

@@ -8,7 +8,7 @@ model Model
 
 annotation PBI_ProTooling = ["DevMode"]
 
-annotation PBIDesktopVersion = 2.137.1102.0 (24.10)
+annotation PBIDesktopVersion = 2.141.1451.0 (25.03)+5007b75f0f7edbed506e31fcb76584cd6d711788
 
 annotation PBI_QueryOrder = ["ObservationData_wibrlt"]
 

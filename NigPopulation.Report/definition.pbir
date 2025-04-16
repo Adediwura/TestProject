@@ -3,7 +3,6 @@
   "datasetReference": {
     "byPath": {
       "path": "../NigPopulation.SemanticModel"
-    },
-    "byConnection": null
+    }
   }
 }
